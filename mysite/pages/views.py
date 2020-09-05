@@ -1,12 +1,12 @@
 import kwargs as kwargs
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.shortcuts import render
 
 
 # Create your views here.
-def home_view(*args, **kwargs):
-    return HttpResponse("<h1>Hello World</h1>")
+def main_view(request):
+    return render(request, 'pages/index.html ')
 
+def second_view(request):
+    return render(request, 'pages/second.html ')
 
-def settings(*args, **kwargs):
-    return HttpResponse("<h1>Settings Pibe</h1>")
