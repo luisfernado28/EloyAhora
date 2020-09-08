@@ -1,0 +1,31 @@
+{% extends 'pages/main.html'%}
+
+{%block content%}
+
+
+<div class="row">
+    <div class="col-md">
+        <div class="card">
+            <table class="table table-sm">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono </th>
+                    <th>Correo</th>
+                </tr>
+
+                {%for us in user%}
+                 <tr>
+                    <td>{{ us.firstname }}</td>
+                    <td>{{ us.lastname }}</td>
+                    <td>{{ us.cellphone }}</td>
+                    <td>{{ us.email }}</td>
+                </tr>
+                {%endfor%}
+                </table>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}
