@@ -18,7 +18,7 @@ from django.urls import path
 
 from . import views
 urlpatterns = [
-    path('main',views.main_view),
-    path('users/<str:pk>/', views.users_view),
-    path('second', views.second_view),
+    path('main',views.main_view, name="main"),
+    path('users/<str:pk>/', views.users_view, name="users"),
+    path('second', views.second_view,name="second"),
 ]
