@@ -15,6 +15,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         # TODO read about how to serialize many to many relations
+
         # fields = ['id','nameofproduct','weight','dimentions','color','brand','owner','tags','description']
         fields= '__all__'
 
