@@ -3,15 +3,38 @@ from rest_framework.parsers import JSONParser
 from .models import *
 from .serializers import *
 
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-from django.shortcuts import render
+from rest_framework.views import APIView
+
 
 # Create your views here.
 
+# Class Based API views
+class ProductAPIView(APIView):
+
+    def get(self,request):
+        product = Product.objects.all()
+        serializer = ProductSerializer(product, many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        serializer = ProductSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+# Function Based API views
 @api_view(['GET','POST'])
 def user_list(request):
 
