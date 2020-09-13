@@ -3,6 +3,9 @@ from .views import *
 
 
 urlpatterns = [
+
+    path('tags/<int:id>/', GenericAPIView.as_view()),
+
     path('product/', ProductAPIView.as_view()),
     path('productdetail/<int:id>/', ProductDetails.as_view()),
 
