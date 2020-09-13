@@ -30,8 +30,32 @@ class ProductAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class ProductDetails(APIView):
 
+    def get_product(self, id):
+        try:
+            return  User.objects.get(pk=id)
+        except User.DoesNotExist:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
+    def get(self,request,id):
+        product= self.get_product(id)
+        serializer = UserSerializer(product)
+        return Response(serializer.data)
+
+    def put(self,request,id):
+        product = self.get_product(id)
+        serializer = ProductSerializer(product, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self,request,id):
+        product = self.get_product(id)
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # Function Based API views
