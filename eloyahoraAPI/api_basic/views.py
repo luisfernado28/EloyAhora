@@ -14,6 +14,9 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import mixins
 
+from rest_framework.authentication import   TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 #Generic API views
@@ -21,7 +24,6 @@ class GenericAPIView(generics.GenericAPIView,mixins.ListModelMixin,mixins.Create
                      mixins.UpdateModelMixin,mixins.RetrieveModelMixin,mixins.DestroyModelMixin):
     serializer_class = TagSerializer
     queryset = Tag.objects.all()
-
     lookup_field = 'id'
 
     def get(self,request,id=None):
