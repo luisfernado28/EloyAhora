@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 
 from rest_framework import generics
 from rest_framework import mixins
+from rest_framework import viewsets
 
 from rest_framework.authentication import   TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -41,8 +42,13 @@ class GenericAPIView(generics.GenericAPIView,mixins.ListModelMixin,mixins.Create
     def delete(self,request,id):
         return self.destroy(request,id)
 
+class ProductViewSet(viewsets.GenericViewSet,mixins.ListModelMixin,mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin,mixins.RetrieveModelMixin,mixins.DestroyModelMixin):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
 
-# Class Based API views
+
+# Class Based API views (Unused)
 class ProductAPIView(APIView):
 
     def get(self,request):
@@ -58,6 +64,8 @@ class ProductAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+# Class Based API views (Unused)
 class ProductDetails(APIView):
 
     def get_product(self, id):
