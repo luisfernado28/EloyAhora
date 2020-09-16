@@ -1,0 +1,43 @@
+CREATE TABLE `eloyahora`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `firstname` VARCHAR(200) NOT NULL,
+  `lastname` VARCHAR(200) NOT NULL,
+  `mail` VARCHAR(200) NOT NULL,
+  `typeofuser` INT NOT NULL,
+  `cellphone` VARCHAR(15) NOT NULL,
+  `direction` VARCHAR(300) NULL,
+  `contact` VARCHAR(300) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+COMMENT = 'User Table for customers and sellers';
+
+
+CREATE TABLE `eloyahora`.`tag` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `eloyahora`.`product` (
+  `id` INT NOT NULL,
+  `nameofproduct` VARCHAR(200) NOT NULL,
+  `weight` VARCHAR(200) NOT NULL,
+  `dimentions` VARCHAR(200) NOT NULL,
+  `color` VARCHAR(200) NOT NULL,
+  `brand` VARCHAR(200) NOT NULL,
+  `owner` VARCHAR(45) NULL,
+  `tags` VARCHAR(45) NULL,
+  `description` VARCHAR(900) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `owner_idx` (`owner` ASC),
+  INDEX `tags_idx` (`tags` ASC),
+  CONSTRAINT `owner`
+    FOREIGN KEY (`owner`)
+    REFERENCES `eloyahora`.`user` (`firstname`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `tags`
+    FOREIGN KEY (`tags`)
+    REFERENCES `eloyahora`.`tag` (`name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
